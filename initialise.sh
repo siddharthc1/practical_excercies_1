@@ -22,7 +22,7 @@ hadoop fs -mkdir /user/cloudera/workshop/archieve/
 
 hive -e "CREATE EXTERNAL TABLE practical_exercise_1.user_upload_dump ( user_id int, file_name STRING, timestamp int) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE LOCATION '/user/cloudera/workshop/process/' tblproperties ('skip.header.line.count'='1');"
                                           
-hive -e "drop table practical_exercise_1.user_report;"
+hive -e "drop table practical_exercise_1.user_total;"
 
 hive -e "create table if not exists practical_exercise_1.user_total(time_ran int, total_users int, users_added int);"
 
