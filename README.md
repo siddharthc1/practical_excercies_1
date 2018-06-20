@@ -24,5 +24,8 @@ Then using Hive query it creates reporting tables namely user_report and user_to
 4. Run the python file practical_exercise_data_generator.py to get MySQL database and CSV file with current timestamp.
 
     python practical_exercise_data_generator.py --load_data
+    
     python practical_exercise_data_generator.py --create_csv
   
+
+5.
