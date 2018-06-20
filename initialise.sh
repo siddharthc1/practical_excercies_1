@@ -4,10 +4,10 @@
 hadoop fs -rm -r /user/cloudera/user
 hadoop fs -rm -r /user/cloudera/activitylog
 
-#starting sqoop metajob
+#starting sqoop metastore
 nohup sqoop metastore &
 
-#deleting the sqoop job 
+#deleting the existing sqoop job  
 sqoop job --meta-connect jdbc:hsqldb:hsql://localhost:16000/sqoop --delete practical_exercise_1.activitylog
 
 #deleting and creating a new folder on HDFS to store the csv files
