@@ -9,9 +9,10 @@ Then using Hive query it creates reporting tables namely user_report and user_to
 1. Clone the "practical_exercise_1" project from the git repo https://github.com/siddharthc1
 2. We will create a new directory and run the process in the folder.
     
-    
+    ```
     mkdir practical_exercise_1
     cd mkdir
+    ```
 
 
 3. Create a MySQL database with name practical_exercise_1
