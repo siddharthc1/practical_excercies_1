@@ -1,12 +1,15 @@
 #!/bin/sh
+#Generating Reporting tables
 
 NOW=$(date +%s)
 
-#drop table already existing user report table
+#Drop table already existing user_report table
 hive -e "drop table if exists practical_exercise_1.user_report;"
 
+#Create user_report table
 hive -e "create table practical_exercise_1.user_report(user_id int, total_updates int, total_inserts int, total_deletes int, last_activity_type string, is_active boolean, upload_count int);"
 
+#Insert user_report table
 hive -e "insert into practical_exercise_1.user_report 
 select a.user_id, 
 COALESCE(b.co,0) as U, 
@@ -28,6 +31,7 @@ if [ $? -ne 0 ];then
 	exit 1
 fi
 
+#Insert into user_total table 
 hive -e "insert into practical_exercise_1.user_total select $NOW, sub1.t , case when sub2.t1 is NULL then sub1.t when sub2.t1 is not NULL then sub1.t-sub2.t1 end from (select count(distinct id) as t from practical_exercise_1.user)sub1, (select max(total_users) t1 from practical_exercise_1.user_total) sub2;"
 
 if [ $? -ne 0 ];then
