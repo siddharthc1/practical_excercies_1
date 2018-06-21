@@ -48,7 +48,6 @@ Then using Hive query it creates reporting tables namely user_report and user_to
     ./MySQL_to_HIVE.sh
     ./Uploading_CSV_to_HDFS.sh
     ./Generating_UserReport_UserTotal.sh
-    
     ```
 
 
