@@ -6,8 +6,10 @@ NOW=$(date +%s)
 # Drop table already existing user_report table
 hive -e "drop table if exists practical_exercise_1.user_report;"
 
+# Creating table user_report Table
 hive -e "create table practical_exercise_1.user_report(user_id int, total_updates int, total_inserts int, total_deletes int, last_activity_type string, is_active boolean, upload_count int);"
 
+# Inserting into table user_report
 hive -e "insert into practical_exercise_1.user_report 
 ﻿select a.user_id,
 COALESCE(b.co,0) as U,
