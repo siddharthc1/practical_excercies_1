@@ -3,13 +3,13 @@
 
 NOW=$(date +%s)
 
-# Drop table already existing user_report table
+# Drop user_report table if it already exists
 hive -e "drop table if exists practical_exercise_1.user_report;"
 
-# Creating table user_report Table
+# Creating user_report Table
 hive -e "create table practical_exercise_1.user_report(user_id int, total_updates int, total_inserts int, total_deletes int, last_activity_type string, is_active boolean, upload_count int);"
 
-# Inserting into table user_report
+# Inserting data into table user_report
 hive -e "insert into practical_exercise_1.user_report 
 ﻿select a.user_id,
 COALESCE(b.co,0) as U,
@@ -27,7 +27,7 @@ left join (select user_id, if(count(*) = 0, FALSE, TRUE) as co from practical_ex
 left join (select user_id, count(user_id) as co from practical_exercise_1.user_upload_dump group by user_id) as g on a.user_id=g.user_id;"
 
 if [ $? -ne 0 ];then
-	echo Failed at creating user_report
+	echo Failed at inserting data into user_report table
 	exit 1
 fi
 
@@ -35,7 +35,7 @@ fi
 hive -e "insert into practical_exercise_1.user_total select current_timestamp(), sub1.t , case when sub2.t1 is NULL then sub1.t when sub2.t1 is not NULL then sub1.t-sub2.t1 end from (select count(distinct id) as t from practical_exercise_1.user)sub1, (select max(total_users) t1 from practical_exercise_1.user_total) sub2;"
 
 if [ $? -ne 0 ];then
-	echo Failed at inserting into user_total
+	echo Failed at inserting data into user_total table
 	exit 1
 fi
 
